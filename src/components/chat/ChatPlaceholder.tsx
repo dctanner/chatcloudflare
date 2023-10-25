@@ -1,4 +1,5 @@
 import React from "react";
+import extractBuffer from "../../utils/pdf"
 
 type Props = {};
 
@@ -8,9 +9,31 @@ export default function ChatPlaceholder({}: Props) {
       <div className="max-w-3xl p-4 text-center text-primary">
         <h1 className="text-4xl font-medium">ChatCloudflare</h1>
         <p className="mt-4 text-lg">
-          A Chat app built with <a href="https://react.dev/">React</a>, <a href="https://nextjs.org/">Next.js</a>, <a href="https://tailwindcss.com/">Tailwind CSS</a>, and <a href="https://ai.cloudflare.com">Cloudflare Workers AI</a>.
+          LLama chat (+ chat with a PDF) running on <a href="https://ai.cloudflare.com">Cloudflare Workers AI</a>.
         </p>
-        <p className="p-6">Based on <a href="https://github.com/Nashex/gpt4-playground">GPT-4 Playground by Nashex</a></p>
+        <p className="mt-4 text-lg">
+        <input
+          type="file"
+          onChange={(event) => {
+            if (!event.target.files) return
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              const buffer = reader.result;
+              extractBuffer(buffer)?.then(pdfData => {
+                let allText = '';
+                pdfData.pages.forEach((page: { content: any[]; }) => {
+                  page.content.forEach((item: { str: string; }) => {
+                    allText += item.str + ' ';
+                  });
+                });
+                console.log(allText); // Here is the concatenated string
+              });
+            };
+            reader.readAsArrayBuffer(file);
+          }}
+        />
+        </p>
       </div>
     </div>
   );
