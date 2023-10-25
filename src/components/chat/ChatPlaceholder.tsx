@@ -1,6 +1,7 @@
 import React from "react";
 import { useCloudflare } from "@/context/CloudflareProvider";
 import extractBuffer from "../../utils/pdf"
+import llamaTokenizer from 'llama-tokenizer-js'
 
 type Props = {};
 
@@ -29,8 +30,14 @@ export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.
                     allText += item.str + ' ';
                   });
                 });
-                updateSystemMessage(`Context:\n"""\n${allText}\n"""\n\nWhen answering the question or responding, use the Context provided.`);
-                console.log(allText); // Here is the concatenated string
+                let tokens = llamaTokenizer.encode(allText);
+                console.log(`Uploaded file total tokens: ${tokens.length}`)
+                tokens = tokens.slice(0, 7000); // Truncate to max 7000 tokens, leaving 1000 for question and answer
+                console.log(`Truncated tokens: ${tokens.length}`)
+                const truncatedText = llamaTokenizer.decode(tokens);
+                console.log(`Truncated text: \n\n`)
+                console.log(truncatedText); // Here is the concatenated string
+                updateSystemMessage(`Context:\n"""\n${truncatedText}\n"""\n\nWhen answering the question or responding, use the Context provided.`);
               });
             };
             reader.readAsArrayBuffer(file);
