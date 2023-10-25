@@ -33,7 +33,7 @@ export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.
                 });
                 let tokens = llamaTokenizer.encode(allText);
                 console.log(`Uploaded file total tokens: ${tokens.length}`)
-                tokens = tokens.slice(0, 7000); // Truncate to max 7000 tokens, leaving 1000 for question and answer
+                tokens = tokens.slice(0, 3500); // TODO set based on model context size
                 console.log(`Truncated tokens: ${tokens.length}`)
                 const truncatedText = llamaTokenizer.decode(tokens);
                 console.log(`Truncated text: \n\n`)
