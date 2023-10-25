@@ -1,9 +1,11 @@
 import React from "react";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import extractBuffer from "../../utils/pdf"
 
 type Props = {};
 
-export default function ChatPlaceholder({}: Props) {
+export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.SetStateAction<string>>}) {
+  const { updateSystemMessage } = useCloudflare();
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="max-w-3xl p-4 text-center text-primary">
@@ -27,6 +29,7 @@ export default function ChatPlaceholder({}: Props) {
                     allText += item.str + ' ';
                   });
                 });
+                updateSystemMessage(`Context:\n"""\n${allText}\n"""\n\nWhen answering the question or responding, use the Context provided.`);
                 console.log(allText); // Here is the concatenated string
               });
             };

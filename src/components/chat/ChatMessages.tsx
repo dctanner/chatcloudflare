@@ -11,6 +11,7 @@ export default function ChatMessages({}: Props) {
   const messageContainer = React.useRef<HTMLDivElement>(null);
   const [scrolling, setScrolling] = React.useState(false);
   const [prevMessageLength, setPrevMessageLength] = React.useState(0);
+  const [doc, setDoc] = React.useState("")
 
   // Scroll handling for auto scroll
   useEffect(() => {
@@ -75,7 +76,7 @@ export default function ChatMessages({}: Props) {
         ref={messageContainer}
       >
         {messages.length === 0 ? (
-          <ChatPlaceholder />
+          <ChatPlaceholder setDoc={setDoc} />
         ) : (
           <>
             {messages.map((message) => (

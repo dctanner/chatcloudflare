@@ -27,6 +27,7 @@ function extractBuffer(buffer, options = {}, cb) {
   // if (options.CMapReaderFactory === undefined) {
   //   options.CMapReaderFactory = LocalCMapReaderFactory;
   // }
+  options.normalizeWhitespace = true
   options.data = new Uint8Array(buffer);
   const pdf = {
     meta: {},
