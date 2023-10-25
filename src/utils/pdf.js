@@ -1,9 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist'
-
-// pdfjsLib.GlobalWorkerOptions.workerPort = new Worker(
-//     new URL("pdfjs-dist/build/pdf.worker.js", import.meta.url)
-//   );
-
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 function extractBuffer(buffer, options = {}, cb) {
   if (!cb) {
