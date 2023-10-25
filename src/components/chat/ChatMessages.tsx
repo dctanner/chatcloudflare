@@ -2,12 +2,13 @@ import { useCloudflare } from "@/context/CloudflareProvider";
 import React, { useEffect } from "react";
 import ChatInput from "./ChatInput";
 import ChatMessage from "./ChatMessage";
+import ChatDocFilename from "./ChatDocFilename";
 import ChatPlaceholder from "./ChatPlaceholder";
 
 type Props = {};
 
 export default function ChatMessages({}: Props) {
-  const { messages, submit } = useCloudflare();
+  const { messages, submit, docFilename } = useCloudflare();
   const messageContainer = React.useRef<HTMLDivElement>(null);
   const [scrolling, setScrolling] = React.useState(false);
   const [prevMessageLength, setPrevMessageLength] = React.useState(0);
@@ -79,6 +80,7 @@ export default function ChatMessages({}: Props) {
           <ChatPlaceholder setDoc={setDoc} />
         ) : (
           <>
+            {docFilename && <ChatDocFilename />}
             {messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
             ))}

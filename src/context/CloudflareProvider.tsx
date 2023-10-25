@@ -27,6 +27,8 @@ const defaultContext = {
   messages: [] as CloudflareChatMessage[],
   config: defaultConfig as CloudflareConfig,
   updateSystemMessage: (content: string) => {},
+  docFilename: "",
+  setDocFilename: (filename: string) => {},
   addMessage: () => {},
   removeMessage: (id: number) => {},
   conversationName: "",
@@ -50,6 +52,8 @@ const CloudflareContext = React.createContext<{
   messages: CloudflareChatMessage[];
   config: CloudflareConfig;
   updateSystemMessage: (content: string) => void;
+  docFilename: string,
+  setDocFilename: (filename: string) => void;
   addMessage: (
     content?: string,
     submit?: boolean,
@@ -89,6 +93,9 @@ export default function CloudflareProvider({ children }: PropsWithChildren) {
   );
   const [config, setConfig] = React.useState<CloudflareConfig>(defaultConfig);
   const [messages, setMessages] = React.useState<CloudflareChatMessage[]>([]);
+
+  // Chat with file
+  const [docFilename, setDocFilename] = React.useState("")
 
   // Load conversation from local storage
   useEffect(() => {
@@ -338,6 +345,8 @@ export default function CloudflareProvider({ children }: PropsWithChildren) {
       config,
       loading,
       updateSystemMessage,
+      docFilename,
+      setDocFilename,
       addMessage,
       removeMessage,
       conversationId,

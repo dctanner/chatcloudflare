@@ -6,7 +6,7 @@ import llamaTokenizer from 'llama-tokenizer-js'
 type Props = {};
 
 export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.SetStateAction<string>>}) {
-  const { updateSystemMessage } = useCloudflare();
+  const { updateSystemMessage, setDocFilename } = useCloudflare();
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="max-w-3xl p-4 text-center text-primary">
@@ -20,6 +20,7 @@ export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.
           onChange={(event) => {
             if (!event.target.files) return
             const file = event.target.files[0];
+            setDocFilename(file.name);
             const reader = new FileReader();
             reader.onloadend = () => {
               const buffer = reader.result;
