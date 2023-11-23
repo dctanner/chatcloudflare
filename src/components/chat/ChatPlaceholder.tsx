@@ -10,9 +10,9 @@ export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="max-w-3xl p-4 text-center text-primary">
-        <h1 className="text-4xl font-medium">ChatCloudflare</h1>
+        <h1 className="text-4xl font-medium">Mistral on Cloudflare</h1>
         <p className="mt-4 text-lg">
-          LLama chat (+ chat with a PDF) running on <a href="https://ai.cloudflare.com">Cloudflare Workers AI</a>.
+          Mistral chat (+ chat with a PDF) running on <a href="https://ai.cloudflare.com">Cloudflare Workers AI</a>.
         </p>
         <p className="mt-4 text-lg">
         <input
@@ -31,11 +31,13 @@ export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.
                     allText += item.str + ' ';
                   });
                 });
-                let tokens = llamaTokenizer.encode(allText);
-                console.log(`Uploaded file total tokens: ${tokens.length}`)
-                tokens = tokens.slice(0, 3500); // TODO set based on model context size
-                console.log(`Truncated tokens: ${tokens.length}`)
-                const truncatedText = llamaTokenizer.decode(tokens);
+                // let tokens = llamaTokenizer.encode(allText);
+                // console.log(`Uploaded file total tokens: ${tokens.length}`)
+                // tokens = tokens.slice(0, 3500); // TODO set based on model context size
+                // console.log(`Truncated tokens: ${tokens.length}`)
+                // const truncatedText = llamaTokenizer.decode(tokens);
+                // Cloudflare Mistral has limit of 4096
+                const truncatedText = allText.slice(0, 3000*4);
                 console.log(`Truncated text: \n\n`)
                 console.log(truncatedText); // Here is the concatenated string
                 updateSystemMessage(`Context:\n"""\n${truncatedText}\n"""\n\nWhen answering the question or responding, use the Context provided.`);

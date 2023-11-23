@@ -30,8 +30,8 @@ export default function Chat() {
   return (
     <React.Fragment>
       <Head>
-        <title>ChatCloudflare</title>
-        <meta name="description" content="A clone of OpenAI playground." />
+        <title>Mistral on Cloudflare</title>
+        <meta name="description" content="Chat with Mistral on Cloudflare Workers AI." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

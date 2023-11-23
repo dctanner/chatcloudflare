@@ -16,9 +16,9 @@ export const getCloudflareCompletion = async (
   const api_key = process.env.CLOUDFLARE_API_KEY
   
   const json = JSON.stringify({messages:  payload.messages});
-
+  console.log(json)
   const response = await fetch(
-    `https://api.cloudflare.com/client/v4/accounts/${account_id}/ai/run/@cf/meta/llama-2-7b-chat-int8`,
+    `https://api.cloudflare.com/client/v4/accounts/${account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.1`,
     {
       headers: { Authorization: `Bearer ${api_key}` },
       method: "POST",

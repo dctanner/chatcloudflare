@@ -42,7 +42,7 @@ export default function ChatSidebar({}: Props) {
           <ThemeButton />
         </div>
 
-        <Github />
+        <a href="https://x.com/dctanner" target="_blank" className="text-sm font-medium ml-4 py-2">By @dctanner</a>
       </div>
     </div>
   );
