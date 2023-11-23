@@ -12,10 +12,10 @@ export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.
       <div className="max-w-3xl p-4 text-center text-primary">
         <h1 className="text-4xl font-medium">Mistral on Cloudflare</h1>
         <p className="mt-4 text-lg">
-          Mistral chat (+ chat with a PDF) running on <a href="https://ai.cloudflare.com">Cloudflare Workers AI</a>.
+          Mistral chat running on <a href="https://ai.cloudflare.com">Cloudflare Workers AI</a>.
         </p>
         <p className="mt-4 text-lg">
-        <input
+        {/* <input
           type="file"
           onChange={(event) => {
             if (!event.target.files) return
@@ -45,7 +45,7 @@ export default function ChatPlaceholder({setDoc}: {setDoc: React.Dispatch<React.
             };
             reader.readAsArrayBuffer(file);
           }}
-        />
+        /> */}
         </p>
       </div>
     </div>
