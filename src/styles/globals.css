@@ -6,8 +6,8 @@
   :root {
     --text-primary: 41, 37, 36;
     --bg-primary: 243, 244, 246;
-    --bg-secondary: 229, 231, 235;
-    --bg-tertiary: 209, 213, 219;
+    --bg-secondary: 244, 244, 244;
+    --bg-tertiary: 255, 255, 255;
   }
 
   .dark {

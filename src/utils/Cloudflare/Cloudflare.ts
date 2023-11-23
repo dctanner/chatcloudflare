@@ -17,12 +17,17 @@ export const getCloudflareCompletion = async (
   
   const json = JSON.stringify({messages:  payload.messages});
   console.log(json)
+  const singlePromptJson = JSON.stringify({ 
+    prompt: payload.messages[payload.messages.length - 1].content
+  })
+  console.log(singlePromptJson)
+
   const response = await fetch(
     `https://api.cloudflare.com/client/v4/accounts/${account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.1`,
     {
       headers: { Authorization: `Bearer ${api_key}` },
       method: "POST",
-      body: json,
+      body: singlePromptJson,
     }
   );
 
