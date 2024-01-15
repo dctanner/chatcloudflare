@@ -67,7 +67,7 @@ export default function ChatInput({}: Props) {
             className="rounded p-4 text-primary hover:bg-primary/50"
           >
             {loading ? (
-              <div className="mx-auto h-5 w-5 animate-spin rounded-full border-b-2 border-white" />
+              <div className="mx-auto h-5 w-5 animate-spin rounded-full border-b-2 border-secondary" />
             ) : (
               <MdSend />
             )}
